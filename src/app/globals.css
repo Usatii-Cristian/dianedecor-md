@@ -1,0 +1,234 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Tailwind v4 reads `@theme`, so every token below is also
+   available as a utility (bg-ivory, text-ink-soft, border-line, font-display).
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-ivory: #faf7f2;
+  --color-paper: #ffffff;
+  --color-ink: #1e1b18;
+  --color-ink-soft: #55504a;
+  /* Darkened from the briefed #8A837A (3.50:1) to reach 4.59:1 on --ivory. */
+  --color-muted: #767065;
+  --color-line: #e4ddd2;
+  --color-accent: #8c6a4f;
+  --color-accent-deep: #6e5240;
+  /* Darkened from the briefed #7C8471 so badge text clears 4.5:1 on paper. */
+  --color-sage: #6b7360;
+  /* Muted red for form validation. 7.2:1 on --ivory. */
+  --color-danger: #9b2c2c;
+  /* Field border: 3.1:1 on --ivory, for WCAG 1.4.11 compliance. */
+  --color-field-line: #B4A996;
+
+  --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-xs: 25rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink-soft);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 17px;
+      line-height: 1.7;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  @media (min-width: 768px) {
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.75rem);
+    }
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+    line-height: 1.2;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-ivory);
+  }
+}
+
+@layer components {
+  /* Eyebrow / micro-label used above section headings and on badges. */
+  .eyebrow {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-muted);
+  }
+
+  /* Inline code inside admin notices: keeps the line rhythm intact. */
+  .admin-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.875em;
+    white-space: nowrap;
+    border-radius: 3px;
+    padding: 0.1em 0.35em;
+    background-color: color-mix(in srgb, var(--color-danger) 10%, transparent);
+  }
+
+  /* Body copy blocks rendered from DB text split on blank lines. */
+  .prose-ro > p + p {
+    margin-top: 1.25em;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The only scroll-driven motion on the site: a 12px rise + fade on section
+   entry. Implemented with CSS scroll-driven animations so no section needs to
+   become a client component. Browsers without support simply show the content.
+   --------------------------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Header chrome. Solid everywhere by default; transparent over the homepage
+   hero until the page scrolls past it. `body:has(#hero)` keeps this correct in
+   the server-rendered HTML, so there is no flash on load.
+   --------------------------------------------------------------------------- */
+.site-header {
+  background-color: color-mix(in srgb, var(--color-ivory) 95%, transparent);
+  backdrop-filter: blur(4px);
+  border-bottom-color: var(--color-line);
+  color: var(--color-ink);
+}
+
+body:has(#hero) .site-header {
+  background-color: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+  color: var(--color-ivory);
+}
+
+/* Over the hero everything in the header is ivory, hover included: the accent
+   brown is unreadable on a dark photograph. */
+body:has(#hero) .site-header a:hover {
+  color: color-mix(in srgb, var(--color-ivory) 75%, transparent);
+}
+
+html[data-scrolled='true'] body:has(#hero) .site-header a:hover {
+  color: var(--color-accent-deep);
+}
+
+body:has(#hero) .site-header .header-cta {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+}
+
+body:has(#hero) .site-header .header-cta:hover {
+  background-color: var(--color-accent);
+  color: var(--color-ivory);
+}
+
+html[data-scrolled='true'] body:has(#hero) .site-header {
+  background-color: color-mix(in srgb, var(--color-ivory) 95%, transparent);
+  backdrop-filter: blur(4px);
+  border-bottom-color: var(--color-line);
+  color: var(--color-ink);
+}
+
+html[data-scrolled='true'] body:has(#hero) .site-header .header-cta {
+  background-color: var(--color-ink);
+  color: var(--color-ivory);
+}
+
+html[data-scrolled='true'] body:has(#hero) .site-header .header-cta:hover {
+  background-color: var(--color-accent-deep);
+  color: var(--color-ivory);
+}
+
+/* Active state for the desktop navigation, from the route ScrollState records. */
+html[data-route='/'] .site-nav [data-nav='/'],
+html[data-route^='/servicii'] .site-nav [data-nav='/servicii'],
+html[data-route^='/portofoliu'] .site-nav [data-nav='/portofoliu'],
+html[data-route^='/despre'] .site-nav [data-nav='/despre'],
+html[data-route^='/contact'] .site-nav [data-nav='/contact'] {
+  color: var(--color-accent-deep);
+}
+
+/* Non-colour cue for the active navigation link (L4). */
+.site-nav [aria-current='page'] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Over the hero the whole header is ivory, so the active mark waits for scroll. */
+body:has(#hero) .site-header .site-nav [data-nav] {
+  color: inherit;
+}
+
+html[data-scrolled='true'] body:has(#hero) .site-header .site-nav [data-nav='/'] {
+  color: var(--color-accent-deep);
+}

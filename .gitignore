@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +40,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local content fallback store
+/.data
+
+# launcher cu token pentru API-ul de rezerva
+/start-backup.ps1
+
+# documente de predare între sesiuni, nu fac parte din proiect
+/.agent-task.md
+/HANDOFF-PROMPT.md

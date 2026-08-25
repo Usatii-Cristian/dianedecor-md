@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum MessageStatus {
+  NEW
+  READ
+  CONTACTED
+  ARCHIVED
+}
+
+model Category {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  slug        String    @unique
+  description String?
+  coverImage  String?
+  order       Int       @default(0)
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  projects    Project[]
+
+  @@index([order])
+}
+
+model Project {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  title            String
+  slug             String    @unique
+  clientNames      String?
+  categoryId       String    @db.ObjectId
+  category         Category  @relation(fields: [categoryId], references: [id])
+  eventDate        DateTime?
+  location         String?
+  shortDescription String
+  description      String
+  coverImage       String
+  images           String[]
+  tags             String[]
+  featured         Boolean   @default(false)
+  published        Boolean   @default(true)
+  order            Int       @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@index([categoryId, published])
+  @@index([featured, published])
+}
+
+model Service {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  title            String
+  slug             String   @unique
+  shortDescription String
+  description      String
+  icon             String
+  features         String[]
+  coverImage       String?
+  priceFrom        Int?
+  order            Int      @default(0)
+  published        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Testimonial {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorName String
+  eventType  String
+  content    String
+  rating     Int      @default(5)
+  featured   Boolean  @default(false)
+  published  Boolean  @default(true)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model ContactMessage {
+  id         String        @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  phone      String
+  email      String?
+  eventType  String
+  eventDate  DateTime?
+  location   String?
+  guestCount Int?
+  message    String
+  status     MessageStatus @default(NEW)
+  createdAt  DateTime      @default(now())
+
+  @@index([status, createdAt])
+}

@@ -1,0 +1,180 @@
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Menu, Phone, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+
+import { FacebookIcon, InstagramIcon } from '@/components/brand/SocialIcons'
+import Button from '@/components/ui/Button'
+import { navigation, siteConfig } from '@/lib/site-config'
+import { cn } from '@/lib/utils'
+
+const FOCUSABLE = 'a[href], button:not([disabled])'
+
+export default function MobileNav() {
+  const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
+  const panelRef = useRef(null)
+  const triggerRef = useRef(null)
+
+  const [prevPathname, setPrevPathname] = useState(pathname)
+
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname)
+    setIsOpen(false)
+  }
+
+  useEffect(() => {
+    if (!isOpen) return undefined
+
+    const { body } = document
+    const previousOverflow = body.style.overflow
+    body.style.overflow = 'hidden'
+
+    const panel = panelRef.current
+    panel?.querySelector(FOCUSABLE)?.focus()
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false)
+        triggerRef.current?.focus()
+        return
+      }
+
+      if (event.key !== 'Tab' || !panel) return
+
+      const focusable = Array.from(panel.querySelectorAll(FOCUSABLE))
+      if (focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      body.style.overflow = previousOverflow
+    }
+  }, [isOpen])
+
+  return (
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        onClick={() => setIsOpen(true)}
+        aria-expanded={isOpen}
+        aria-haspopup="dialog"
+        aria-label="Deschide meniul"
+        className="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
+      >
+        <Menu size={24} strokeWidth={1.5} aria-hidden="true" />
+      </button>
+
+      {isOpen ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Meniu"
+          className="fixed inset-0 z-[60] lg:hidden"
+        >
+          <button
+            type="button"
+            aria-label="Închide meniul"
+            tabIndex={-1}
+            onClick={() => setIsOpen(false)}
+            className="absolute inset-0 h-full w-full cursor-default bg-ink/40"
+          />
+
+          <div
+            ref={panelRef}
+            className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-ivory px-6 pt-5 pb-8"
+          >
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false)
+                  triggerRef.current?.focus()
+                }}
+                aria-label="Închide meniul"
+                className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-ink"
+              >
+                <X size={24} strokeWidth={1.5} aria-hidden="true" />
+              </button>
+            </div>
+
+            <nav aria-label="Navigare principală" className="mt-6 flex-1">
+              <ul className="flex flex-col gap-1">
+                {navigation.map((item) => {
+                  const isActive =
+                    item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
+
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        aria-current={isActive ? 'page' : undefined}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          'font-display block py-3 text-3xl leading-none',
+                          isActive ? 'text-accent-deep' : 'text-ink'
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </nav>
+
+            <div className="flex flex-col gap-5 border-t border-line pt-6">
+              <Button href="/contact" variant="primary" fullWidth onClick={() => setIsOpen(false)}>
+                Cere o ofertă
+              </Button>
+
+              <a
+                href={siteConfig.phoneHref}
+                className="inline-flex items-center gap-3 text-ink transition-colors duration-200 ease-out hover:text-accent-deep"
+              >
+                <Phone size={18} aria-hidden="true" />
+                {siteConfig.phone}
+              </a>
+
+              <div className="flex items-center gap-4">
+                <a
+                  href={siteConfig.socials.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="inline-flex h-11 w-11 items-center justify-center text-ink transition-colors duration-200 ease-out hover:text-accent-deep"
+                >
+                  <InstagramIcon size={22} />
+                </a>
+                <a
+                  href={siteConfig.socials.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Facebook"
+                  className="inline-flex h-11 w-11 items-center justify-center text-ink transition-colors duration-200 ease-out hover:text-accent-deep"
+                >
+                  <FacebookIcon size={22} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
+  )
+}
