@@ -28,7 +28,7 @@ export default function NavLinks() {
               href={item.href}
               data-nav={item.href}
               aria-current={isActive ? 'page' : undefined}
-              className="text-sm tracking-[0.02em] transition-colors duration-200 ease-out hover:text-accent-deep aria-[current=page]:underline aria-[current=page]:underline-offset-[6px]"
+              className="inline-flex min-h-11 items-center text-sm tracking-[0.02em] transition-colors duration-200 ease-out hover:text-accent-deep aria-[current=page]:underline aria-[current=page]:underline-offset-[6px]"
             >
               {item.label}
             </Link>

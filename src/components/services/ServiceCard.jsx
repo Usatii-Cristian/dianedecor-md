@@ -14,7 +14,7 @@ export default function ServiceCard({ service }) {
 
       <Link
         href={`/servicii/${service.slug}`}
-        className="inline-flex items-center gap-2 text-sm tracking-[0.02em] text-ink transition-colors duration-200 ease-out group-hover:text-accent-deep"
+        className="inline-flex min-h-11 items-center gap-2 py-2 text-sm tracking-[0.02em] text-ink transition-colors duration-200 ease-out group-hover:text-accent-deep"
       >
         Vezi detalii
         <ArrowRight size={16} aria-hidden="true" />

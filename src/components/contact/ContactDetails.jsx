@@ -25,7 +25,7 @@ export default function ContactDetails() {
 
       <ul className="flex flex-col border-t border-line">
         <DetailRow icon={Phone} label="Telefon">
-          <a href={siteConfig.phoneHref} className="hover:text-accent-deep">
+          <a href={siteConfig.phoneHref} className="inline-flex min-h-11 items-center hover:text-accent-deep">
             {siteConfig.phone}
           </a>
         </DetailRow>
@@ -35,7 +35,7 @@ export default function ContactDetails() {
             href={siteConfig.whatsappHref}
             target="_blank"
             rel="noreferrer"
-            className="hover:text-accent-deep"
+            className="inline-flex min-h-11 items-center hover:text-accent-deep"
           >
             Scrie-ne pe WhatsApp
           </a>
@@ -48,7 +48,7 @@ export default function ContactDetails() {
             href={siteConfig.socials.instagram}
             target="_blank"
             rel="noreferrer"
-            className="hover:text-accent-deep"
+            className="inline-flex min-h-11 items-center hover:text-accent-deep"
           >
             @dianedecor.md
           </a>
@@ -59,7 +59,7 @@ export default function ContactDetails() {
             href={siteConfig.socials.facebook}
             target="_blank"
             rel="noreferrer"
-            className="hover:text-accent-deep"
+            className="inline-flex min-h-11 items-center hover:text-accent-deep"
           >
             DianeDecor
           </a>

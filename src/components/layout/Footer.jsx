@@ -52,7 +52,7 @@ export default async function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="py-1 text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
+                  className="inline-flex min-h-11 items-center text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
                 >
                   {item.label}
                 </Link>
@@ -68,7 +68,7 @@ export default async function Footer() {
               <li key={service.slug}>
                 <Link
                   href={`/servicii/${service.slug}`}
-                  className="py-1 text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
+                  className="inline-flex min-h-11 items-center text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
                 >
                   {service.title}
                 </Link>
@@ -83,7 +83,7 @@ export default async function Footer() {
             <li>
               <a
                 href={siteConfig.phoneHref}
-                className="inline-flex items-center gap-3 text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
+                className="inline-flex min-h-11 items-center gap-3 py-1 text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
               >
                 <Phone size={16} aria-hidden="true" className="shrink-0" />
                 {siteConfig.phone}
