@@ -51,7 +51,7 @@ export default function AdminSidebar() {
 
   const navigation = (
     <>
-      <Link href="/admin" className="inline-flex">
+      <Link href="/admin" className="inline-flex py-2">
         <Logo variant="dark" className="text-xl" />
       </Link>
 
@@ -94,7 +94,7 @@ export default function AdminSidebar() {
     <>
       {/* Bara mobilă, cu declanșatorul panoului */}
       <div className="flex h-16 items-center justify-between border-b border-line bg-paper px-5 lg:hidden">
-        <Link href="/admin">
+        <Link href="/admin" className="inline-flex py-2">
           <Logo variant="dark" className="text-xl" />
         </Link>
 

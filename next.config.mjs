@@ -4,9 +4,19 @@ const nextConfig = {
   images: {
     // quality={85} is used across the site; Next 16 only serves qualities listed here.
     qualities: [75, 85],
-    // AVIF first: roughly 20-30% smaller than WebP for these photographs, with
-    // WebP as the fallback for browsers that do not take it.
-    formats: ['image/avif', 'image/webp'],
+    // WebP only. AVIF was measured at 357ms per encode against WebP's 77ms on
+    // these photographs — and produced a *larger* file (37KB vs 21KB). Every
+    // uncached size of every image paid that cost on its first request, which is
+    // what made the gallery pages crawl.
+    formats: ['image/webp'],
+    // Next generates one encode per size in these lists. The defaults reach up to
+    // 3840px, which nothing here ever renders — the widest container is 1280px.
+    // Trimming them cuts the work the first visitor to a page pays for.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [64, 96, 128, 256, 384],
+    // These files never change without their filename changing, so there is no
+    // reason to re-encode them every four hours.
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
