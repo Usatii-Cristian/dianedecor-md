@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
+  experimental: {
+    // Client router cache. `dynamic` defaults to 0, so /contact was refetched on
+    // every visit; 30s makes returning to it instant without serving stale leads.
+    staleTimes: { dynamic: 30, static: 300 },
+  },
   images: {
     // quality={85} is used across the site; Next 16 only serves qualities listed here.
     qualities: [75, 85],

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, after } from 'next/server'
 
 import { isDatabaseConfigured, prisma } from '@/lib/prisma'
 import { saveFallbackMessage } from '@/lib/message-store'
@@ -137,12 +137,15 @@ export async function POST(request) {
     }
   }
 
-  try {
-    await notifyByEmail(data)
-  } catch (error) {
-    // A failed notification must never fail the request for the visitor.
-    console.error('[api/contact] notification email failed:', error.message)
-  }
+  // The visitor does not have to wait on Resend. `after` runs this once the
+  // response has been sent; a failed notification must never fail the request.
+  after(async () => {
+    try {
+      await notifyByEmail(data)
+    } catch (error) {
+      console.error('[api/contact] notification email failed:', error.message)
+    }
+  })
 
   return NextResponse.json({ ok: true, id: stored.id })
 }
