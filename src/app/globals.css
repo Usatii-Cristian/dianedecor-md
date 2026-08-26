@@ -209,6 +209,17 @@ html[data-scrolled='true'] body:has(#hero) .site-header .header-cta:hover {
   color: var(--color-ivory);
 }
 
+/* Below lg the header is fully opaque. The 95% tint plus backdrop blur is a
+   deliberate desktop touch, but on a phone the content scrolling underneath
+   shows through and reads as a rendering fault rather than a design choice. */
+@media (max-width: 1023px) {
+  .site-header,
+  html[data-scrolled='true'] body:has(#hero) .site-header {
+    background-color: var(--color-ivory);
+    backdrop-filter: none;
+  }
+}
+
 /* Active state for the desktop navigation, from the route ScrollState records. */
 html[data-route='/'] .site-nav [data-nav='/'],
 html[data-route^='/servicii'] .site-nav [data-nav='/servicii'],
