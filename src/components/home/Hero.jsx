@@ -16,7 +16,7 @@ export default function Hero() {
           src="/images/hero.webp"
           alt=""
           width={2000}
-          height={875}
+          height={866}
           sizes="100vw"
           quality={82}
           priority
