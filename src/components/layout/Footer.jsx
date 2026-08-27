@@ -16,7 +16,7 @@ export default async function Footer() {
 
   return (
     <footer className="bg-ink text-ivory">
-      <Container className="grid gap-x-8 gap-y-10 border-t border-ivory/15 py-12 md:grid-cols-2 lg:grid-cols-4">
+      <Container className="grid gap-x-8 gap-y-8 border-t border-ivory/15 py-12 md:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-4">
           <Logo variant="light" className="text-2xl" />
           <p className="max-w-[34ch] text-sm leading-[1.7] text-ivory/70">
@@ -47,7 +47,7 @@ export default async function Footer() {
 
         <nav aria-label="Navigare în subsol" className="flex flex-col gap-4">
           <ColumnTitle>Navigare</ColumnTitle>
-          <ul className="flex flex-col gap-3 text-sm">
+          <ul className="flex flex-col text-sm">
             {navigation.map((item) => (
               <li key={item.href}>
                 <Link
@@ -63,7 +63,7 @@ export default async function Footer() {
 
         <nav aria-label="Servicii" className="flex flex-col gap-4">
           <ColumnTitle>Servicii</ColumnTitle>
-          <ul className="flex flex-col gap-3 text-sm">
+          <ul className="flex flex-col text-sm">
             {services.map((service) => (
               <li key={service.slug}>
                 <Link
@@ -79,7 +79,7 @@ export default async function Footer() {
 
         <div className="flex flex-col gap-4">
           <ColumnTitle>Contact</ColumnTitle>
-          <ul className="flex flex-col gap-4 text-sm">
+          <ul className="flex flex-col gap-1 text-sm">
             <li>
               <a
                 href={siteConfig.phoneHref}
