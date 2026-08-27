@@ -6,20 +6,16 @@ import Button from '@/components/ui/Button'
 export default function Hero() {
   return (
     <section id="hero" aria-labelledby="hero-title" className="relative -mt-20 bg-ivory pt-20">
-      {/*
-        Fotografia rămâne așa cum e — fără văl peste ea. Marginile rupte de sus
-        și de jos sunt transparente, iar laturile se sting în ivoriu printr-o
-        mască, ca imaginea să se lege de fundalul paginii în loc să pară lipită.
-      */}
+      {/* Fotografia se afișează așa cum e, la proporțiile ei, fără decupare. */}
       <Image
         src="/images/hero.webp"
         alt=""
         width={2000}
         height={866}
         sizes="100vw"
-        quality={82}
+        quality={85}
         priority
-        className="h-auto w-full [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
+        className="h-auto w-full"
       />
 
       <Container className="relative overflow-hidden">
