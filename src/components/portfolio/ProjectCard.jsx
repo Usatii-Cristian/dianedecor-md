@@ -21,7 +21,7 @@ export default function ProjectCard({ project, priority = false, sizes = CARD_SI
             sizes={sizes}
             quality={85}
             priority={priority}
-            className="object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
+            className="object-cover"
           />
         </div>
 

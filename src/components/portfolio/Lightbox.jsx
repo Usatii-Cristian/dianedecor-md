@@ -98,7 +98,7 @@ export default function Lightbox({ images, projectTitle }) {
                 fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                 quality={85}
-                className="object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
+                className="object-cover"
               />
             </button>
           </li>
