@@ -10,7 +10,7 @@ export default function Hero() {
         {/* PNG-ul original, servit neatins: `unoptimized` oprește reencodarea
             făcută altfel de next/image. */}
         <Image
-          src="/badac47b-9679-43fb-ae21-0b97a69180bc.png"
+          src="/hero-nou.png"
           alt=""
           width={1774}
           height={768}
