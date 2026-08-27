@@ -7,26 +7,6 @@ export default function Hero() {
   return (
     <section id="hero" aria-labelledby="hero-title" className="relative -mt-20 bg-ivory pt-20">
       <div className="relative overflow-hidden">
-        {/* PNG-ul original, servit neatins: `unoptimized` oprește reencodarea
-            făcută altfel de next/image. */}
-        <Image
-          src="/hero-nou.png"
-          alt=""
-          width={1774}
-          height={768}
-          sizes="100vw"
-          priority
-          unoptimized
-          className="h-auto w-full"
-        />
-
-        {/* Doar cât să se citească textul peste sala plină de flori — restul
-            fotografiei rămâne la culoarea lui. */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 hidden bg-[radial-gradient(ellipse_44%_60%_at_50%_46%,rgba(250,247,242,0.78)_0%,rgba(250,247,242,0.38)_58%,transparent_78%)] lg:block"
-        />
-
         <Image
           src="/images/crenguta.webp"
           alt=""
@@ -44,10 +24,8 @@ export default function Hero() {
           className="pointer-events-none absolute top-4 -right-16 hidden w-[22vw] max-w-xs -scale-x-100 opacity-60 lg:block"
         />
 
-        {/* De la lg în sus textul stă peste fotografie; sub lg banda e prea
-            scundă la proporțiile ei, așa că textul trece dedesubt, pe ivoriu. */}
-        <Container className="lg:absolute lg:inset-0 lg:flex lg:items-center">
-          <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 pt-10 pb-6 text-center lg:py-0">
+        <Container>
+          <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 pt-16 pb-14 text-center md:pt-24 md:pb-20">
             <h1 id="hero-title">
               <span className="font-script block text-[clamp(2.75rem,9vw,6rem)] leading-[1.05] text-ink">
                 Decorăm povești
