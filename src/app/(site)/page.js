@@ -1,7 +1,6 @@
 import CtaBand from '@/components/home/CtaBand'
 import FeaturedProjects from '@/components/home/FeaturedProjects'
 import Hero from '@/components/home/Hero'
-import IntroAbout from '@/components/home/IntroAbout'
 import ProcessSteps from '@/components/home/ProcessSteps'
 import ServicesPreview from '@/components/home/ServicesPreview'
 import TestimonialsSlider from '@/components/home/TestimonialsSlider'
@@ -29,7 +28,6 @@ export default async function HomePage() {
       <JsonLd data={localBusinessSchema()} />
 
       <Hero />
-      <IntroAbout />
       <ServicesPreview services={services} />
       <FeaturedProjects projects={featuredProjects} />
       <ProcessSteps />
