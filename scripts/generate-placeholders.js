@@ -102,11 +102,10 @@ async function main() {
     written += 1
   }
 
-  await writeImage('public/images/hero.jpg', 2400, 1600, '#b6a894', 'rgba(255,255,255,0.4)')
   await writeImage('public/images/despre-fondator.jpg', 1200, 1500, '#c6b8a6', 'rgba(255,255,255,0.5)')
   await writeImage('public/images/atelier.jpg', 1200, 1500, '#bfb2a1', 'rgba(255,255,255,0.5)')
   await writeImage('public/images/og-image.jpg', 1200, 630, '#1e1b18', 'rgba(250,247,242,0.75)')
-  written += 4
+  written += 3
 
   console.log(`Generated ${written} placeholder images.`)
 }
