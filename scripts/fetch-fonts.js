@@ -32,7 +32,6 @@ const GLYPHS = [
 const FONTS = [
   { family: 'Cormorant Garamond', weight: 400, file: 'cormorant-400.woff2' },
   { family: 'Cormorant Garamond', weight: 600, file: 'cormorant-600.woff2' },
-  { family: 'Great Vibes', weight: 400, file: 'greatvibes-400.woff2' },
   { family: 'Inter', weight: 400, file: 'inter-400.woff2' },
   { family: 'Inter', weight: 500, file: 'inter-500.woff2' },
 ]

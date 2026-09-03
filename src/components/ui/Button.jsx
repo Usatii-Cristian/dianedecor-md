@@ -10,7 +10,6 @@ const variants = {
   secondary: 'border border-ink text-ink hover:bg-ink hover:text-ivory',
   light: 'border border-ivory/70 text-ivory hover:bg-ivory hover:text-ink',
   inverse: 'bg-ivory text-ink hover:bg-accent hover:text-ivory',
-  rose: 'bg-rose text-ivory hover:bg-rose-deep',
   ghost:
     'group h-auto min-h-11 rounded-none px-0 py-2 text-ink hover:text-accent-deep relative inline-flex flex-col items-start',
 }

@@ -18,14 +18,10 @@
   --color-sage: #6b7360;
   /* Muted red for form validation. 7.2:1 on --ivory. */
   --color-danger: #9b2c2c;
-  /* Roz prăfuit pentru butonul principal: 4.61:1 cu text ivoriu deasupra. */
-  --color-rose: #a45f5f;
-  --color-rose-deep: #8b4d4d;
   /* Field border: 3.1:1 on --ivory, for WCAG 1.4.11 compliance. */
   --color-field-line: #B4A996;
 
   --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
-  --font-script: var(--font-script-face), ui-serif, Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --breakpoint-xs: 25rem;
@@ -173,17 +169,27 @@ body:has(#hero) .site-header {
   background-color: transparent;
   backdrop-filter: none;
   border-bottom-color: transparent;
-  color: var(--color-ink);
+  color: var(--color-ivory);
 }
 
 /* Over the hero everything in the header is ivory, hover included: the accent
    brown is unreadable on a dark photograph. */
 body:has(#hero) .site-header a:hover {
-  color: var(--color-accent-deep);
+  color: color-mix(in srgb, var(--color-ivory) 75%, transparent);
 }
 
 html[data-scrolled='true'] body:has(#hero) .site-header a:hover {
   color: var(--color-accent-deep);
+}
+
+body:has(#hero) .site-header .header-cta {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+}
+
+body:has(#hero) .site-header .header-cta:hover {
+  background-color: var(--color-accent);
+  color: var(--color-ivory);
 }
 
 html[data-scrolled='true'] body:has(#hero) .site-header {
@@ -191,6 +197,16 @@ html[data-scrolled='true'] body:has(#hero) .site-header {
   backdrop-filter: blur(4px);
   border-bottom-color: var(--color-line);
   color: var(--color-ink);
+}
+
+html[data-scrolled='true'] body:has(#hero) .site-header .header-cta {
+  background-color: var(--color-ink);
+  color: var(--color-ivory);
+}
+
+html[data-scrolled='true'] body:has(#hero) .site-header .header-cta:hover {
+  background-color: var(--color-accent-deep);
+  color: var(--color-ivory);
 }
 
 /* Below lg the header is fully opaque. The 95% tint plus backdrop blur is a

@@ -52,7 +52,7 @@ export default async function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="inline-flex items-center py-2 text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
+                  className="inline-flex min-h-11 items-center text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
                 >
                   {item.label}
                 </Link>
@@ -68,7 +68,7 @@ export default async function Footer() {
               <li key={service.slug}>
                 <Link
                   href={`/servicii/${service.slug}`}
-                  className="inline-flex items-center py-2 text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
+                  className="inline-flex min-h-11 items-center text-ivory/80 transition-colors duration-200 ease-out hover:text-ivory"
                 >
                   {service.title}
                 </Link>

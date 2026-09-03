@@ -37,7 +37,7 @@ export default function Header() {
             <Phone size={16} aria-hidden="true" />
             {siteConfig.phone}
           </a>
-          <Button href="/contact" variant="rose" className="header-cta">
+          <Button href="/contact" variant="primary" className="header-cta">
             Cere o ofertă
           </Button>
         </div>

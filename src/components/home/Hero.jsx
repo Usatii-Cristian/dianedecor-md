@@ -5,61 +5,45 @@ import Button from '@/components/ui/Button'
 
 export default function Hero() {
   return (
-    <section id="hero" aria-labelledby="hero-title" className="relative -mt-20 bg-ivory pt-20">
-      <div className="relative overflow-hidden">
-        <Image
-          src="/images/crenguta.webp"
-          alt=""
-          width={900}
-          height={600}
-          aria-hidden="true"
-          className="pointer-events-none absolute top-4 -left-16 hidden w-[22vw] max-w-xs opacity-60 lg:block"
-        />
-        <Image
-          src="/images/crenguta.webp"
-          alt=""
-          width={900}
-          height={600}
-          aria-hidden="true"
-          className="pointer-events-none absolute top-4 -right-16 hidden w-[22vw] max-w-xs -scale-x-100 opacity-60 lg:block"
-        />
+    <section
+      id="hero"
+      aria-labelledby="hero-title"
+      className="relative -mt-20 flex min-h-svh items-end overflow-hidden bg-ink pt-20 md:items-center"
+    >
+      <Image
+        src="/images/hero.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        quality={85}
+        priority
+        className="object-cover"
+      />
+      <div aria-hidden="true" className="absolute inset-0 bg-black/40" />
 
-        <Container>
-          <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 pt-16 pb-14 text-center md:pt-24 md:pb-20">
-            <h1 id="hero-title">
-              <span className="font-script block text-[clamp(2.75rem,9vw,6rem)] leading-[1.05] text-ink">
-                Decorăm povești
-              </span>
-              <span className="font-display mt-1 block text-[clamp(1.125rem,3vw,2rem)] leading-tight font-normal text-ink-soft">
-                transformăm momente în amintiri
-              </span>
-            </h1>
+      <Container className="relative pt-16 pb-16 md:pt-20 md:pb-24">
+        <div className="flex max-w-3xl flex-col gap-6">
+          <p className="eyebrow text-ivory/70">Studio de decor · Republica Moldova</p>
 
-            <Image
-              src="/images/ornament.webp"
-              alt=""
-              width={600}
-              height={200}
-              aria-hidden="true"
-              className="w-36 md:w-52"
-            />
+          <h1 id="hero-title" className="text-ivory">
+            Decor pentru ziua în care totul trebuie să iasă bine
+          </h1>
 
-            <p className="max-w-[54ch] text-ink-soft">
-              Nunți, cumetrii, cereri în căsătorie și ceremonii în aer liber. Concept, montaj și
-              demontare, în Chișinău și în toată țara.
-            </p>
+          <p className="max-w-[54ch] text-ivory/85">
+            Nunți, cumetrii, cereri în căsătorie și ceremonii în aer liber. Concept, montaj și
+            demontare, în Chișinău și în toată țara.
+          </p>
 
-            <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <Button href="/contact" variant="rose">
-                Cere o ofertă
-              </Button>
-              <Button href="/portofoliu" variant="secondary">
-                Vezi portofoliul
-              </Button>
-            </div>
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row">
+            <Button href="/contact" variant="inverse">
+              Cere o ofertă
+            </Button>
+            <Button href="/portofoliu" variant="light">
+              Vezi portofoliul
+            </Button>
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </section>
   )
 }
